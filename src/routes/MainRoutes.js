@@ -9,21 +9,20 @@ import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import history from './history';
 
 const auth = new AuthAdm();
+
 export class MainRoutes extends Component {
-	
-  render(){
+
+render(){
   return (
     <Router history={history}>
       <Switch>
         <Route path="/summary/:user/:num" component={SummaryConstructor} />
-		<Route path="/test/:test" component={TestLinkConstructor} />
-		<Route exact path="/tests_edit" render={()=> <TestsEdit auth={auth}/>} />
-		<Route exact path="/tests" render={()=> <Tests auth={auth}/>} />
-		<Route exact path="/" render={()=> <MainPage auth={auth}/>} />
-
-		<Route  path="*" render={() => <Redirect to="/" />} />
-      
-	  </Switch>
+				<Route path="/test/:test" component={TestLinkConstructor} />
+				<Route exact path="/tests_edit" render={()=> <TestsEdit auth={auth}/>} />
+				<Route exact path="/tests" render={()=> <Tests auth={auth}/>} />
+				<Route exact path="/" render={()=> <MainPage auth={auth}/>} />
+				<Route  path="*" render={() => <Redirect to="/" />} />
+	  	</Switch>
     </Router>
   );
 }}

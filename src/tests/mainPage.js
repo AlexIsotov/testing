@@ -8,15 +8,13 @@ class MainPage extends Component {
 	  const {isAuthenticated, isCaptched}=this.props.auth;
     return (
       <div>
-	  {(!isAuthenticated() && !isCaptched()) ? 
-	  <div>
-		  
-		  <NavBar auth={this.props.auth}/>
-		  <MainAdminNew />
-	  </div>:
-	   <LoginAdm auth={this.props.auth} />
-	  }
-     
+      	  {(!isAuthenticated() && !isCaptched()) ?
+      	  <div>
+      		  <NavBar auth={this.props.auth}/>
+      		  <MainAdminNew />
+      	  </div>:
+      	  <LoginAdm auth={this.props.auth} />
+      	  }
       </div>
     );
   }

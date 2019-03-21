@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 const DEFAULT_COLOR = '#DCDCDC';
+
 class RadialChart extends Component {
   state = {}
 
@@ -42,8 +42,7 @@ class RadialChart extends Component {
             cy="90"
             r={circleRadius}
           />
-		 
-          <circle
+		      <circle
             className="radial-chart-progress"
             stroke={color}
             strokeWidth={strokeWidth}
@@ -58,7 +57,6 @@ class RadialChart extends Component {
 		  <text fontSize="42" fontFamily="Verdana" x={dimension/2-30} y={dimension/2+28} fill={color}>{progress}%</text>
 			:
 		  <text fontSize="42" fontFamily="Verdana" x={dimension/2-18} y={dimension/2+28} fill={color}>{progress}%</text>
-
  }
         </svg>
       </div>
