@@ -3,9 +3,10 @@ import history from '../routes/history';
 import axios from 'axios';
 import qs from 'qs';
 import ReCAPTCHA from "react-google-recaptcha";
+import {apiUrl} from '../constants/apiUrl';
 
 export class LoginAdm extends Component {
- 
+
  constructor(props){
     super(props)
     this.state = {
@@ -17,7 +18,7 @@ export class LoginAdm extends Component {
 	  errMsg: '',
 	  errMsgLP:'',
     }
- }	
+ }
  handleLoginChange=(e)=>{
 	 this.setState({[e.target.name]:e.target.value, errMsgLP: ''});
  }
@@ -26,20 +27,20 @@ export class LoginAdm extends Component {
  }
  handleSubmit(e){
 	 e.preventDefault();
-	 
+
 	 const data=({'login':this.state.login, 'password':this.state.password, 'time':this.props.time});
 	const dataCaptcha=({'g-recaptcha-response': this.state.recaptcha});
 	const optionsLogIn= {
 		  method: 'POST',
 		  headers: { 'content-type': 'application/x-www-form-urlencoded' },
 		  data: qs.stringify(data),
-		  url:'/loginadm.php',
+		  url:apiUrl+'/loginadm.php',
 		  };
     const optionsCaptcha= {
 		  method: 'POST',
 		  headers: { 'content-type': 'application/x-www-form-urlencoded' },
 		  data: qs.stringify(dataCaptcha),
-		  url:'/recaptcha.php',
+		  url:apiUrl+'/recaptcha.php',
 		  };
 		axios(optionsLogIn)
 		  .then((response)=>{
@@ -65,29 +66,29 @@ export class LoginAdm extends Component {
 				})
 			  .catch(function (error) {
 				console.log(error);
-			
+
 				});
-			
+
 			}
 			})
 		  .catch(function (error) {
 			console.log(error);
 		  });
-		
-		  
- } 
+
+
+ }
  captchaChange=(value)=>{
 	 this.setState({recaptcha: value , errMsg: ''});
 	 }
 logout=()=>{
 	this.props.auth.logout();
 }
-		
+
   render() {
 	  const {isAuthenticated, isCaptched} = this.props.auth;
     return (
 	<div>
-	{(isAuthenticated() || isCaptched()) && 
+	{(isAuthenticated() || isCaptched()) &&
 	<div className="container py-3 mt-5">
 			  <form className="form-signin border" onSubmit={(e)=>this.handleSubmit(e)}>
 			    {this.state.errMsg!=='' ? <p className="alert alert-warning text-center">{this.state.errMsg}</p>:''}
@@ -116,11 +117,9 @@ logout=()=>{
 		<button className="btn btn-sm btn-primary mr-1 mt-1" onClick={this.logout}>Выйти</button>
 	  </div>
 	  }
-     </div> 
+     </div>
     );
   }
 
 }
 export default LoginAdm;
-
-
