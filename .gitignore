@@ -10,7 +10,7 @@
 /build
 
 # url
-src/constants/url.js
+src/constants/apiUrl.js
 
 # misc
 .DS_Store
