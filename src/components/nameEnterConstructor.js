@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import {apiUrl} from '../constants/apiUrl';
 
 export class NameEnterConstructor extends Component {
 	constructor(props){

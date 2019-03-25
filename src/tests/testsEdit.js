@@ -20,6 +20,7 @@ class TestsEdit extends Component {
   		testsEdit:[],
   		modal: false,
   		nestedModal:false,
+      type: 'qa'
   	})
   }
 
@@ -87,6 +88,9 @@ class TestsEdit extends Component {
        });
     }
 
+    selectType = e =>{
+      this.setState({[e.target.name]: e.target.value})
+    }
   render() {
 	  const {isAuthenticated, isCaptched} = this.props.auth;
     return (
@@ -143,7 +147,15 @@ class TestsEdit extends Component {
       			<Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} >
               <ModalHeader toggle={this.toggleNested}>Добавить вопрос</ModalHeader>
               <ModalBody>
-  		  			     <TestsEditAddQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />
+                   <select className="form-control form-control-sm" name="type"
+                   data-toggle="tooltip" data-placement="bottom" title="Выбор типа ответа"
+                   onChange={this.selectType}  value={this.state.type}>
+                     <option value='qa' >Текстовый ответ</option>
+                     <option value='test1'>1 правильный ответ</option>
+                     <option value='test2'>Несколько правильных</option>
+                   </select>
+                   {this.state.type==='qa' &&  <TestsEditAddQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
+
       			  </ModalBody>
             </Modal>
       			<button className="btn btn-primary btn-sm ml-1 mt-2" data-toggle="tooltip" data-placement="bottom" title="Добавить новый вопрос" onClick={this.toggleNested}>Добавить вопрос</button>

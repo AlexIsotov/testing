@@ -3,8 +3,9 @@ import axios from 'axios';
 import qs from 'qs';
 import GeneralTest from './generalTest';
 import Auth from '../components/auth';
-const auth = new Auth();
 import {apiUrl} from '../constants/apiUrl';
+const auth = new Auth();
+
 
 class TestLinkConstructor extends Component {
 	constructor(props){
