@@ -33,6 +33,7 @@ export class TestsEditAddQuestion extends Component {
 		};
 		axios(optionsTest)
 		.then((response)=>{
+				console.log(response);
 				this.setState({question:'', answer:'', mark:''}, ()=>{
 					this.props.cancel();
 					this.props.upd(this.props.test);

@@ -145,10 +145,10 @@ class TestsEdit extends Component {
     			       return(
     				<TestsEditConstructor no={table[0]} que={table[1]} answ={table[2]} key={table[0]} mark={table[3]} testNumber={this.state.testnumber} upd={this.editTest}/>
     			   ) })}
-      			<Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} >
-              <ModalHeader toggle={this.toggleNested}>Добавить вопрос</ModalHeader>
+      			<Modal isOpen={this.state.nestedModal}  backdrop='static'>
+              <ModalHeader >Добавить вопрос</ModalHeader>
               <ModalBody>
-                   <select className="form-control form-control-sm" name="type"
+                   <select className="form-control form-control-sm mb-1" name="type"
                    data-toggle="tooltip" data-placement="bottom" title="Выбор типа ответа"
                    onChange={this.selectType}  value={this.state.type}>
                      <option value='qa' >Текстовый ответ</option>
