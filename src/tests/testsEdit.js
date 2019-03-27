@@ -7,6 +7,7 @@ import NavBar from '../routes/navBar';
 import TestsEditConstructor from '../components/testsEditConstructor';
 import TestsEditConstructorGeneral from '../components/testsEditConstructorGeneral';
 import TestsEditAddQuestion from '../components/testsEditAddQuestion';
+import TestsEditAddRadioQuestion from '../components/testsEditAddRadioQuestion';
 import TestsEditAddTest from '../components/testsEditAddtest';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import {apiUrl} from '../constants/apiUrl';
@@ -151,10 +152,11 @@ class TestsEdit extends Component {
                    data-toggle="tooltip" data-placement="bottom" title="Выбор типа ответа"
                    onChange={this.selectType}  value={this.state.type}>
                      <option value='qa' >Текстовый ответ</option>
-                     <option value='test1'>1 правильный ответ</option>
-                     <option value='test2'>Несколько правильных</option>
+                     <option value='radio'>Радиокнопка</option>
+                     <option value='check'>Чекбокс</option>
                    </select>
-                   {this.state.type==='qa' &&  <TestsEditAddQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
+                   {this.state.type=='qa' && <TestsEditAddQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
+                   {this.state.type=='radio' && <TestsEditAddRadioQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
 
       			  </ModalBody>
             </Modal>
