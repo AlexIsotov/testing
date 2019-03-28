@@ -17,8 +17,8 @@ class TestsEditConstructorDesign extends Component {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
-	startEdit=()=>{
-		this.setState({editMode: !this.state.editMode, text: this.props.val});
+	startEdit=answ=>{
+		this.setState({editMode: !this.state.editMode, text:this.props.type!=="variants" ? this.props.val: answ});
 	}
 
 	edit=()=>{
@@ -60,24 +60,48 @@ class TestsEditConstructorDesign extends Component {
 	}
 
   render() {
+		const editButton = <div className="mr-1 mt-1">
+												<button className="btn btn-sm btn-outline-secondary "
+												data-toggle="tooltip" data-placement="bottom" title="Редактировать"
+												onClick={this.startEdit}>
+													<img src={Pencil} alt="edit" width={14} height={14}/>
+												</button>
+											 </div>
     return (
       <div>
 	  				<div >
 							{this.state.editMode===false ?
-								<div className="d-flex justify-content-between ">
-									<p className="ml-1" dangerouslySetInnerHTML={{ __html: this.props.val.replace(/\n\r?/g, '<br />')}}>
-									</p>
-									<div className="mr-1 mt-1">
-										<button className="btn btn-sm btn-outline-secondary "
-										data-toggle="tooltip" data-placement="bottom" title="Редактировать"
-										onClick={this.startEdit}>
-											<img src={Pencil} alt="edit" width={14} height={14}/>
-										</button>
+								<div>
+									{this.props.type==="variants"?
+										  this.props.val!==null?
+											this.props.val.map((el)=> {return(
+												<div  className="d-flex justify-content-between " key={el.id}>
+													<p>
+														{el.answer}
+													</p>
+													<div className="mr-1 mt-1">
+														<button className="btn btn-sm btn-outline-secondary "
+														data-toggle="tooltip" data-placement="bottom" title="Редактировать"
+														onClick={(answ)=>this.startEdit(el.answer)}>
+															<img src={Pencil} alt="edit" width={14} height={14}/>
+														</button>
+													</div>
+												</div>
+											)}
+											)
+											:
+											null
+									:
+									<div  className="d-flex justify-content-between ">
+										<p className="ml-1" dangerouslySetInnerHTML={{ __html: this.props.val.replace(/\n\r?/g, '<br />')}}>
+										</p>
+										{editButton}
 									</div>
+								  }
 								</div>:
-								<textarea className="form-control" name="text" onBlur={this.edit} defaultValue={this.props.val} onChange={this.handleInputChange} autoFocus={true} rows={5}/>
+									<textarea className="form-control" name="text" onBlur={this.edit} defaultValue={this.state.text} onChange={this.handleInputChange} autoFocus={true} rows={5}/>
 							 }
-						 </div> 
+						 </div>
        </div>
     );
   }

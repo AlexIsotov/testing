@@ -143,7 +143,7 @@ class TestsEdit extends Component {
 
     		  	{this.state.testsEdit.map((table)=>{
     			       return(
-    				<TestsEditConstructor no={table[0]} que={table[1]} answ={table[2]} key={table[0]} mark={table[3]} testNumber={this.state.testnumber} upd={this.editTest}/>
+    				<TestsEditConstructor no={table[0]} que={table[1]} answ={table[2]} key={table[0]} mark={table[3]} variants={table[4]} testNumber={this.state.testnumber} upd={this.editTest}/>
     			   ) })}
       			<Modal isOpen={this.state.nestedModal}  backdrop='static'>
               <ModalHeader >Добавить вопрос</ModalHeader>

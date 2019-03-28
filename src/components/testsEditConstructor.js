@@ -19,6 +19,12 @@ class TestsEditConstructor extends Component {
   							<h4 className=""> Вопрос: </h4>
   							<TestsEditConstructorDesign val={this.props.que} no={this.props.no} type={"question"} testNumber={this.props.testNumber} upd={this.props.upd}/>
   						</div>
+              {this.props.variants &&
+                <div className="border border-secondary rounded bg-light mt-1 px-1 py-1">
+    							<h4 className=""> Варианты ответа: </h4>
+    							<TestsEditConstructorDesign val={JSON.parse(this.props.variants)} no={this.props.no} type={"variants"} testNumber={this.props.testNumber} upd={this.props.upd}/>
+    						</div>
+              }
   						<div className="border border-secondary rounded bg-light mt-1 px-1 py-1">
   							<h4> Ответ: </h4>
   							<TestsEditConstructorDesign val={this.props.answ} no={this.props.no} type={"answer"}  testNumber={this.props.testNumber} upd={this.props.upd}/>
