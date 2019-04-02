@@ -22,40 +22,45 @@ class TestsEditConstructorDesignInput extends Component {
 	}
 
 	edit=()=>{
-		const conf = window.confirm('Внести изменения ?');
-		if (conf){
-			const type=this.props.type;
-			const testNum=('test'+parseInt(this.props.testNumber, 10)+'_correct');
-			let dataTest = {};
-			switch (type) {
-			  case "question":
-			  dataTest = ({'testNum': testNum, 'id': this.props.no, "question": this.state.text});
-				break;
-			  case "answer":
-			  dataTest = ({'testNum': testNum, 'id': this.props.no, "answer": this.state.text});
-				break;
-			  case "maxmark":
-			  dataTest = ({'testNum': testNum, 'id': this.props.no, "maxmark": this.state.text});
-				break;
-			  default:
-				dataTest = {};
+		if (this.state.text !== this.props.val) {
+			const conf = window.confirm('Внести изменения ?');
+			if (conf){
+				const type=this.props.type;
+				const testNum=('test'+parseInt(this.props.testNumber, 10)+'_correct');
+				let dataTest = {};
+				switch (type) {
+					case "question":
+					dataTest = ({'testNum': testNum, 'id': this.props.no, "question": this.state.text});
+					break;
+					case "answer":
+					dataTest = ({'testNum': testNum, 'id': this.props.no, "answer": this.state.text});
+					break;
+					case "maxmark":
+					dataTest = ({'testNum': testNum, 'id': this.props.no, "maxmark": this.state.text});
+					break;
+					default:
+					dataTest = {};
+				}
+				const optionsTest = {
+						method: 'POST',
+						headers: { 'content-type': 'application/x-www-form-urlencoded' },
+						data: qs.stringify(dataTest),
+						url:apiUrl+'/edit_test.php',
+					};
+				axios(optionsTest)
+				.then((response)=>{
+					this.setState({editMode: false}, ()=>{this.props.upd(this.props.testNumber)});
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 			}
-			const optionsTest = {
-				  method: 'POST',
-				  headers: { 'content-type': 'application/x-www-form-urlencoded' },
-				  data: qs.stringify(dataTest),
-				  url:apiUrl+'/edit_test.php',
-				};
-			axios(optionsTest)
-		  .then((response)=>{
-				this.setState({editMode: false}, ()=>{this.props.upd(this.props.testNumber)});
-			})
-		  .catch(function (error) {
-				console.log(error);
-		  });
+			else {
+					this.setState({editMode: false, text: ''});
+			}
 		}
 		else {
-				this.setState({editMode: false, text: ''});
+			this.setState({editMode: false, text: ''});
 		}
 	}
   render() {

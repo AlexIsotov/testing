@@ -155,8 +155,8 @@ class TestsEdit extends Component {
                      <option value='radio'>Радиокнопка</option>
                      <option value='check'>Чекбокс</option>
                    </select>
-                   {this.state.type=='qa' && <TestsEditAddQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
-                   {this.state.type=='radio' && <TestsEditAddRadioQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
+                   {this.state.type==='qa' && <TestsEditAddQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
+                   {this.state.type==='radio' && <TestsEditAddRadioQuestion test={this.state.testnumber} no={this.state.testsEdit.length+1} cancel={this.toggleNested} upd={this.editTest} />}
 
       			  </ModalBody>
             </Modal>
