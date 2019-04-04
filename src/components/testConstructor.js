@@ -32,7 +32,7 @@ class TestConstructor extends Component {
 	  }
   }
 
-  render() {
+	render() {
 	  const {testNom, timer}=this.props;
 	  const {isAuthenticated, isCaptched}=this.props.auth;
     return (

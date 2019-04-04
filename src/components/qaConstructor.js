@@ -9,6 +9,7 @@ export class QaConstructor extends Component {
 		this.state={
 			answer:'',
 			question:'',
+			selectedAnswer:''
 		}
 	}
 
@@ -58,6 +59,10 @@ export class QaConstructor extends Component {
 			})
 		}
 
+		selectAnswer = e =>{
+			this.setState({answer: e.target.value});
+		}
+
 		componentDidMount(){
 			if(this.props.question){
 				this.setState({question: this.props.question[0]})
@@ -65,20 +70,31 @@ export class QaConstructor extends Component {
 		}
 
   render() {
-	  const {end} = this.props;
+	  const {end, question} = this.props;
     return (
       <div>
 			  <div className="container">
 		      <h4 className="text-center" dangerouslySetInnerHTML={{ __html: this.state.question.replace(/\n\r?/g, '<br />')}}></h4>
-			    <form onSubmit={(e)=>this.handleAnswerSubmit(e)} >
+					<form onSubmit={(e)=>this.handleAnswerSubmit(e)} >
+						{
+							question[1]!==null ?
+							JSON.parse(question[1]).slice().map((el)=>{ return(
+								<div className="container my-2" key={el.id}>
+								<div className="">
+									<input type='radio' name='variant' value={el.answer} checked={this.state.answer===el.answer} onChange={this.selectAnswer}/> {el.id+'. '+el.answer} <br/>
+								</div>
+								</div>
+							)
+						}) :
 						<div className="container">
-						<div className="form-group">
-							<textarea className="form-control" type="text"
-							placeholder="Ответ" name="answer"
-							onChange={(e)=>this.handleAnswerChange(e)}  value={this.state.answer}
-							rows={6} autoFocus={true} required/>
+							<div className="form-group">
+								<textarea className="form-control" type="text"
+								placeholder="Ответ" name="answer"
+								onChange={(e)=>this.handleAnswerChange(e)}  value={this.state.answer}
+								rows={6} autoFocus={true} required/>
+							</div>
 						</div>
-						</div>
+						}
 						{end!==true ? (
 							<div className="d-flex justify-content-center">
 								<button className="btn btn-outline-dark btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Перейти к следующему вопросу">Следующий вопрос</button>

@@ -36,6 +36,7 @@ export class MainAdminNew extends Component {
 	getUserAnswers = (value, id, check) =>{
 		arrCom=[];
 		arrMark=[];
+		console.log(value);
 	  this.setState({ userAnswers: value, userId: id, check: check, modal: true })
 	}
 
@@ -204,8 +205,12 @@ export class MainAdminNew extends Component {
 											<div className="mt-1 ml-1">
 												<p><strong>Вопрос:</strong></p>
 												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[1].replace(/\n\r?/g, '<br />')}} ></p>
+												{
+													table[4]!==null &&
+													JSON.parse(table[4]).map((el)=>{return (<p key={el.id} style={{color: table[5]===el.answer && 'green'}}>{el.id+'. '+el.answer}</p>)})
+												}
 												<p><strong>Ответ:</strong></p>
-												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[4].replace(/\n\r?/g, '<br />')}} ></p>
+												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[5].replace(/\n\r?/g, '<br />')}} ></p>
 												<p><strong>Правильный ответ:</strong></p>
 												<p dangerouslySetInnerHTML={{ __html: table[2].replace(/\n\r?/g, '<br />') }}></p>
 											</div>
