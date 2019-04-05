@@ -35,6 +35,7 @@ export class InputCommentConstructor extends Component {
 						<div className="container">
 							<label><strong> Комментарий:</strong></label>
 							<textarea  name="comment" className="form-control" onChange={this.handleCommentChange} value={this.state.comment} rows="5"/>
+							{ this.props.putMark===true ?
 							<div className="d-flex justify-content-end mt-1">
 								 <label className="mr-1"><strong> Оценка: </strong></label>
 								 <div className="input-group w-25">
@@ -43,7 +44,9 @@ export class InputCommentConstructor extends Component {
 									 	<span className="input-group-text">из {this.props.maxMark}</span>
 								 	 </div>
 							   </div>
-						  </div>
+						  </div>:
+							null
+						}
 						</div>
 				 </div>
        </div>

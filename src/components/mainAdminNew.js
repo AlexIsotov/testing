@@ -218,9 +218,13 @@ export class MainAdminNew extends Component {
 												<p dangerouslySetInnerHTML={{ __html: table[2].replace(/\n\r?/g, '<br />') }}></p>
 											</div>
 										</div>
-										{table[5]==='No_answer' ? <div key={Math.floor(Math.random() * 9000)} className="table-warning mt-1 text-center"><strong>Нечего оценивать!</strong></div> :
+										{table[5]==='No_answer' ?
+										<div>
+											<InputCommentConstructor index={table[0]-1} getComment={this.getComment} getMark={this.getMark} defComValue={table[6]} defMarkValue={table[7]} maxMark={table[3]} putMark={false}/>
+											<div key={Math.floor(Math.random() * 9000)} className="table-warning mt-1 text-center"><strong>Нечего оценивать!</strong></div>
+										</div>:
 										<div className="mt-1" >
-										 <InputCommentConstructor index={table[0]-1} getComment={this.getComment} getMark={this.getMark} defComValue={table[6]} defMarkValue={table[7]} maxMark={table[3]}/>
+										 <InputCommentConstructor index={table[0]-1} getComment={this.getComment} getMark={this.getMark} defComValue={table[6]} defMarkValue={table[7]} maxMark={table[3]} putMark={true}/>
 										</div>}
 									</div>
 							) })}

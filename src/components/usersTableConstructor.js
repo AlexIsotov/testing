@@ -52,6 +52,7 @@ showAnswers = (id , num, check) => {
 		axios(options)
 		.then((response)=> {
 			this.setState({userAnswer: response.data},()=>{
+										console.log(this.state.userAnswer);
 				axios(optionsTest)
 				.then((response)=> {
 					this.setState({correctAnswers: response.data},()=>{
@@ -59,7 +60,7 @@ showAnswers = (id , num, check) => {
 						let arrayUser=[];
 						arrayUser= this.state.userAnswer;
 						for (let i=0;i<array.length; i++){
-							if (arrayUser[i]==null){arrayUser[i]=[i,'No_answer']; array[i].push(arrayUser[i][1]);}
+							if (arrayUser[i]==null || arrayUser[i][1]==="") {arrayUser[i]=[i,'No_answer']; array[i].push(arrayUser[i][1]);}
 							else{for(let j=0;j<arrayUser[i].length;j++){array[i].push(arrayUser[i][j+1]);}}
 						}
 						this.setState({userAnswers:array},()=>{
