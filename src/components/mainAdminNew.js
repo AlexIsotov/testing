@@ -207,7 +207,10 @@ export class MainAdminNew extends Component {
 												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[1].replace(/\n\r?/g, '<br />')}} ></p>
 												{
 													table[4]!==null &&
-													JSON.parse(table[4]).map((el)=>{return (<p key={el.id} style={{color: table[5]===el.answer && 'green'}}>{el.id+'. '+el.answer}</p>)})
+													<div>
+														<p><strong>Варианты ответа:</strong></p>
+														{JSON.parse(table[4]).map((el)=>{return (<p key={el.id} style={{color: el.answer===table[5] ? el.answer===table[2] ? 'green': 'red' :'black'}}>{el.id+'. '+el.answer}</p>)})}
+													</div>
 												}
 												<p><strong>Ответ:</strong></p>
 												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[5].replace(/\n\r?/g, '<br />')}} ></p>
@@ -215,9 +218,9 @@ export class MainAdminNew extends Component {
 												<p dangerouslySetInnerHTML={{ __html: table[2].replace(/\n\r?/g, '<br />') }}></p>
 											</div>
 										</div>
-										{table[4]==='No_answer' ? <div key={Math.floor(Math.random() * 9000)} className="table-warning mt-1 text-center"><strong>Нечего оценивать!</strong></div> :
+										{table[5]==='No_answer' ? <div key={Math.floor(Math.random() * 9000)} className="table-warning mt-1 text-center"><strong>Нечего оценивать!</strong></div> :
 										<div className="mt-1" >
-										 <InputCommentConstructor index={table[0]-1} getComment={this.getComment} getMark={this.getMark} defComValue={table[5]} defMarkValue={table[6]} maxMark={table[3]}/>
+										 <InputCommentConstructor index={table[0]-1} getComment={this.getComment} getMark={this.getMark} defComValue={table[6]} defMarkValue={table[7]} maxMark={table[3]}/>
 										</div>}
 									</div>
 							) })}

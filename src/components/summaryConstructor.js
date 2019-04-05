@@ -73,7 +73,7 @@ class SummaryConstructor extends Component {
 								for(let i=0;i<this.state.userAnswers.length;i++){
 									markSum=markSum+parseInt(this.state.userAnswers[i][3], 10);
 									if(this.state.userAnswers[i][6]){
-										markUser=markUser+parseInt(this.state.userAnswers[i][6], 10);
+										markUser=markUser+parseInt(this.state.userAnswers[i][7], 10);
 									}
 								}
 								this.setState({max:markSum, current:markUser}, ()=>{
@@ -154,16 +154,23 @@ class SummaryConstructor extends Component {
 													<div className="mt-1 ml-1">
 														<p><strong>Вопрос:</strong></p>
 														<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[1].replace(/\n\r?/g, '<br />')}}></p>
+														{
+															table[4]!==null &&
+															<div>
+																<p><strong>Варианты ответа:</strong></p>
+																{JSON.parse(table[4]).map((el)=>{return (<p key={el.id} style={{color: el.answer===table[5] ? el.answer===table[2] ? 'green': 'red' :'black'}}>{el.id+'. '+el.answer}</p>)})}
+															</div>
+														}
 														<p><strong>Ответ:</strong></p>
-														<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[4].replace(/\n\r?/g, '<br />')}}></p>
+														<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[5].replace(/\n\r?/g, '<br />')}}></p>
 														<p><strong>Правильный ответ:</strong></p>
 														<p dangerouslySetInnerHTML={{ __html: table[2].replace(/\n\r?/g, '<br />')}}></p>
 													</div>
 												</div>
-   											{table[4]==='No_answer' ?
+   											{table[5]==='No_answer' ?
 												<div key={Math.floor(Math.random() * 9000)} className="table-warning text-center"><strong>Ответ отсутствует!</strong></div> :
 												<div className="mt-1" >
-												 <OutputCommentConstructor maxMark={table[3]} defComValue={table[5]} defMarkValue={table[6]} />
+												 <OutputCommentConstructor maxMark={table[3]} defComValue={table[6]} defMarkValue={table[7]} />
 												</div>}
 											</div>
 					)
