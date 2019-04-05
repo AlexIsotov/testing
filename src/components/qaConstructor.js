@@ -76,16 +76,20 @@ export class QaConstructor extends Component {
 			  <div className="container">
 		      <h4 className="text-center" dangerouslySetInnerHTML={{ __html: this.state.question.replace(/\n\r?/g, '<br />')}}></h4>
 					<form onSubmit={(e)=>this.handleAnswerSubmit(e)} >
+
 						{
 							question[1]!==null ?
-							JSON.parse(question[1]).slice().map((el)=>{ return(
-								<div className="container my-2" key={el.id}>
-								<div className="">
-									<input type='radio' name='variant' value={el.answer} checked={this.state.answer===el.answer} onChange={this.selectAnswer}/> {el.id+'. '+el.answer} <br/>
+							<div className="py-4">
+								<div className="btn-group-toggle">
+								{JSON.parse(question[1]).slice().map((el)=>{ return(
+									<label key={el.id} className={this.state.answer===el.answer? "btn btn-block btn-lg btn-outline-dark active" :'btn  btn-block btn-lg btn-outline-dark'}>
+										<input type='radio' name='variant' value={el.answer} autoComplete="off" checked={this.state.answer===el.answer} onChange={this.selectAnswer}/> {el.id+'. '+el.answer} <br/>
+									</label>
+								)
+								})
+								}
 								</div>
-								</div>
-							)
-						}) :
+							</div> :
 						<div className="container">
 							<div className="form-group">
 								<textarea className="form-control" type="text"
@@ -97,10 +101,10 @@ export class QaConstructor extends Component {
 						}
 						{end!==true ? (
 							<div className="d-flex justify-content-center">
-								<button className="btn btn-outline-dark btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Перейти к следующему вопросу">Следующий вопрос</button>
+								<button className="btn btn-outline-primary btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Перейти к следующему вопросу">Следующий вопрос</button>
 							</div>):
 						(<div className="d-flex justify-content-center">
-								<button className="btn btn-outline-dark btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Завершить тест">Завершить тест</button>
+								<button className="btn btn-outline-danger btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Завершить тест">Завершить тест</button>
 						</div>)}
 			 		</form>
 			  </div>
