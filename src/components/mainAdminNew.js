@@ -202,20 +202,28 @@ export class MainAdminNew extends Component {
 									<div  className="container border mt-2 pb-2" style={{background:'gainsboro'}} key={Math.floor(Math.random() * 88855500)} >
 										<h3 className="text-center ">№ {table[0]}</h3>
 										<div className="border bg-light" >
-											<div className="mt-1 ml-1">
+											<div className="mt-1 mx-1">
 												<p><strong>Вопрос:</strong></p>
 												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[1].replace(/\n\r?/g, '<br />')}} ></p>
 												{
-													table[4]!==null &&
+													table[4]!==null ?
 													<div>
-														<p><strong>Варианты ответа:</strong></p>
-														{JSON.parse(table[4]).map((el)=>{return (<p key={el.id} style={{color: el.answer===table[5] ? el.answer===table[2] ? 'green': 'red' :'black'}}>{el.id+'. '+el.answer}</p>)})}
+														<p><strong>Ответ:</strong></p>
+														{JSON.parse(table[4]).map((el)=>{return (
+															<div className="btn-group-toggle py-2">
+															<label key={el.id} className={el.answer===table[5] ? el.answer===table[2]? "btn btn-block btn-lg btn-success active " :'btn  btn-block btn-lg btn-danger': 'btn  btn-block btn-lg btn-outline-secondary disabled'}>
+																<input type='radio' name='variant' value={el.answer} autoComplete="off" checked={this.state.answer===el.answer} disabled/> {el.id+'. '+el.answer} <br/>
+															</label>
+															</div>
+														)})}
+													</div>:
+													<div>
+														<p><strong>Ответ:</strong></p>
+														<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[5].replace(/\n\r?/g, '<br />')}} ></p>
+														<p><strong>Правильный ответ:</strong></p>
+														<p dangerouslySetInnerHTML={{ __html: table[2].replace(/\n\r?/g, '<br />') }}></p>
 													</div>
 												}
-												<p><strong>Ответ:</strong></p>
-												<p className="border-bottom" dangerouslySetInnerHTML={{ __html: table[5].replace(/\n\r?/g, '<br />')}} ></p>
-												<p><strong>Правильный ответ:</strong></p>
-												<p dangerouslySetInnerHTML={{ __html: table[2].replace(/\n\r?/g, '<br />') }}></p>
 											</div>
 										</div>
 										{table[5]==='No_answer' ?

@@ -80,9 +80,13 @@ export class TestsEditAddRadioQuestion extends Component {
 				  <textarea className="form-control" name="question" value={this.state.question} onChange={this.handleChange} rows="5" required/>
 				  <p>Варианты ответа:</p>
 					{this.state.answers!==[] && this.state.answers.map((el)=>{
-						return <div key={el.id}>
-										<input type='radio' name='variant' value={el.answer} checked={this.state.selectedAnswer===el.answer} onChange={this.selectAnswer}/> {el.id+'. '+el.answer} <br/>
-									 </div>
+						return (
+							<div key={el.id} className="btn-group-toggle py-2">
+								 <label key={el.id} className={this.state.selectedAnswer===el.answer? "btn btn-block btn-lg btn-outline-success active" :'btn  btn-block btn-lg btn-outline-dark'}>
+									 <input type='radio' name='variant' value={el.answer} autoComplete="off" checked={this.state.selectedAnswer===el.answer} onChange={this.selectAnswer}/> {el.id+'. '+el.answer} <br/>
+								 </label>
+							</div>
+						)
 					})}
 				  <textarea className="form-control" name="answer" value={this.state.answer} onChange={this.handleChange} rows="5" />
 					<div className="d-flex justify-content-end">
