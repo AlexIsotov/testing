@@ -104,7 +104,7 @@ export class QaConstructor extends Component {
 								<button className="btn btn-outline-primary btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Перейти к следующему вопросу">Следующий вопрос</button>
 							</div>):
 						(<div className="d-flex justify-content-center">
-								<button className="btn btn-outline-danger btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Завершить тест">Завершить тест</button>
+								<button className="btn btn-danger btn-lg mr-1" data-toggle="tooltip" data-placement="bottom" title="Завершить тест">Завершить тест</button>
 						</div>)}
 			 		</form>
 			  </div>
