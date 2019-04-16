@@ -60,7 +60,6 @@ export class TestsEditAddRadioQuestion extends Component {
 		};
 		axios(optionsTest)
 		.then((response)=>{
-				console.log(response);
 				this.setState({question:'', answer:'', mark:0, answers:[], selectedAnswer:''}, ()=>{
 					this.props.cancel();
 					this.props.upd(this.props.test);
